@@ -1,0 +1,7 @@
+{
+  "name": "Tokan-Trano",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
