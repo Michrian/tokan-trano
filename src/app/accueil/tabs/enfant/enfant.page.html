@@ -1,0 +1,122 @@
+<ion-content>
+  <ion-toolbar>
+
+    <ion-buttons slot="start">
+      
+      <ion-button (click)="formAjoutEnfant()">
+        <ion-icon name="person-add-outline"></ion-icon>
+      </ion-button>
+      <ion-button (click)="formAjoutRoutine()">
+        <ion-icon name="stats-chart-outline"></ion-icon>
+      </ion-button>
+      <!--<ion-button (click)="afficherDivParametre()">
+        <ion-icon slot="icon-only" ios="ellipsis-horizontal" md="ellipsis-vertical"></ion-icon>
+      </ion-button>-->
+    </ion-buttons>
+    <ion-chip slot="end" (click)="parametre()">
+      <ion-avatar>
+        <img [src]="img">
+      </ion-avatar>
+      <ion-label>{{email}}</ion-label>
+    </ion-chip>
+  </ion-toolbar>
+
+
+  <div class="toolbar_list" *ngIf="!isShow">
+    <ion-card-content>
+      <ion-list>
+        <ion-item>
+          <ion-button (click)="formAjoutEnfant()" fill="clear" size="large">
+            <ion-icon name="add-circle-outline"></ion-icon>Listes enfants
+          </ion-button>
+        </ion-item>
+        <ion-item>
+          <ion-button (click)="formAjoutRoutine()" fill="clear" size="large">
+            <ion-icon name="add-circle-outline"></ion-icon>Liste routines
+          </ion-button>
+        </ion-item>
+      </ion-list>
+
+    </ion-card-content>
+  </div>
+
+  <div class="formAdd">
+    <div class="cl_nom_liste">
+      <h1>{{objEnfantParDefaut.nom}} </h1>
+      <ion-select [(ngModel)]="lstEnfant" (ionChange)="selectEnfant(lstEnfant,objEnfantParDefaut.key)">
+        <ion-select-option *ngFor="let p of listeEnfants" value={{p.key}}>{{p.nom}}
+        </ion-select-option>
+      </ion-select>
+    </div>
+
+
+    <h1>{{objEnfantParDefaut.ages}}</h1>
+
+
+
+    <ion-button fill="clear" icon-only>
+      <ion-datetime [(ngModel)]=formNote.aujourdhui
+        monthShortNames="jan, fev, mar, avr, mai, jui, jul, aoû, sep, oct, nov, dec" doneText="Validé"
+        cancelText="Fermer" displayFormat="DD/MMM/YYYY">
+      </ion-datetime>
+      <ion-icon name="calendar-outline"></ion-icon>
+    </ion-button>
+
+    <ion-button fill="clear" icon-only>
+      <ion-datetime displayFormat="HH:mm" [(ngModel)]=formNote.heure doneText="Validé" cancelText="Fermer">
+      </ion-datetime>
+      <ion-icon name="time-outline"></ion-icon>
+    </ion-button>
+
+    <ion-card>
+      <ion-item>
+        <ion-avatar slot="start">
+          <img [src]="">
+        </ion-avatar>
+        <ion-label>BIBERON</ion-label>
+        <ion-input type="number" placeholder="10ml" [(ngModel)]="formNote.biberon"></ion-input>
+      </ion-item>
+    </ion-card>
+    <ion-card>
+      <ion-item>
+        <ion-avatar slot="start">
+          <img [src]="">
+        </ion-avatar>
+        <ion-label>TEMPERATURE</ion-label>
+        <ion-input type="number" placeholder="10ml" [(ngModel)]="formNote.temperature"></ion-input>
+      </ion-item>
+    </ion-card>
+
+    <ion-card>
+      <ion-item>
+        <ion-avatar slot="start">
+          <img [src]="">
+        </ion-avatar>
+        <ion-label>SELLES</ion-label>
+        <ion-checkbox slot="end" value='false' [(ngModel)]="formNote.selles"></ion-checkbox>
+      </ion-item>
+    </ion-card>
+    <ion-card>
+      <ion-item>
+        <ion-avatar slot="start">
+          <img [src]="">
+        </ion-avatar>
+        <ion-label>URINE</ion-label>
+        <ion-checkbox slot="end" [(ngModel)]="formNote.urine"></ion-checkbox>
+      </ion-item>
+    </ion-card>
+    <ion-card>
+      <ion-item>
+        <ion-textarea rows="6" cols="20" placeholder="Enter any notes here..." [(ngModel)]='formNote.commentaire'>
+        </ion-textarea>
+      </ion-item>
+
+    </ion-card>
+    <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+      <ion-fab-button (click)="addNote(formNote)">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </div>
+
+</ion-content>

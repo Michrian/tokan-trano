@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthentificationService } from '../services/authentification.service';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -12,25 +12,41 @@ export class HomePage {
     email: '', password: ''
   }
   test :any;
-  constructor(public authService : AuthentificationService) {}
+  isAuth:any;
+  constructor(public authService : AuthentificationService,public router:Router) {
 
+
+  }
+
+  ngOnInit(){
+    this.authService.verifierAuth().subscribe(conx => {
+      if (conx) {
+        console.log("Connecté");
+        this.router.navigate(['accueil']);
+        this.isAuth = true;
+      } else {
+        console.log("Déconnecté");
+        this.isAuth = false;
+      };
+    });
+  }
   authConnexion(user) {
 
   this.authService.signInUser(user.email, user.password)
       .then((data) => {
         if (data.user.uid) {
-          //this.auth.ToastNotification('Vous étes connecté !');
-         // this.route.navigate(['accueil']);
-           this.test = "MAND LE IZY AH";
-
+          this.authService.ToastNotification('Vous étes connecté !');
+          this.router.navigate(['accueil']);
         } else {
-          
-          this.test = "TSY MAND LE IZY AH";
           this.user = {
             email: '', password: ''
           }
-         // this.route.navigate(['home']);
+          this.router.navigate(['home']);
         }
       });
+  }
+
+  formInscription() {
+    this.router.navigate(['/inscription']);
   }
 }

@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>formAjoutEnfant</ion-title>
+    <ion-button slot="end" shape="clear" size="small" (click)="fermerModal()">
+      <ion-icon name="close-sharp" slot="icon-only"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+
+  <ion-card-content>
+
+
+    <ion-item>
+      <ion-label position="floating">Nom </ion-label>
+      <ion-input type="text" [(ngModel)]="myObj.nom"></ion-input>
+
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating" >Date de naissance</ion-label>
+      <ion-datetime [(ngModel)]=myObj.datenaissance (ionChange)="calculAge()" [max]="aujourdhui" displayFormat="DD/MM/YYYY" ></ion-datetime>
+
+    </ion-item>
+
+    <ion-item>
+      <button>
+        <ion-button color="primary" size="small" shape="round" (click)="btnAjoutEnfant(myObj)">+ ajouter enfant
+        </ion-button>
+      </button>
+    </ion-item>
+
+    <span ><h1 [hidden]="show">{{resulatAge}}</h1></span>
+  </ion-card-content>
+
+<ion-card-content >
+  <ion-item-sliding *ngFor="let p of listeEnfants" >
+    <ion-item> {{p.nom}} - {{p.datenaissance}}</ion-item>
+    <ion-item-options>
+      <ion-button  color="danger" size ="small" expandable (click)="deleteEnfant(p.key)"><ion-icon name="trash-outline"></ion-icon></ion-button>
+    </ion-item-options>
+  </ion-item-sliding>
+  <!--
+ <ion-list>
+  <ion-item-sliding #item *ngFor="let p of listeEnfants">
+    <ion-item >
+      {{p.nom}}
+    </ion-item>
+    <ion-item-options side="left">
+      <button ion-button (click)="archive(item)">
+        <ion-icon name="archive"></ion-icon>
+        Archive
+      </button>
+    </ion-item-options>
+
+  </ion-item-sliding>
+</ion-list>-->
+</ion-card-content>
+ 
+
+
+</ion-content>

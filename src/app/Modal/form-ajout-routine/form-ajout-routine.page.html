@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Carnet de note</ion-title>
+    <ion-button slot="end" shape="clear" size="small" (click)="fermerModal()">
+      <ion-icon name="close-sharp" slot="icon-only"></ion-icon>
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list  *ngFor="let p of tabTemplate">
+        <ion-item>
+          <ion-avatar slot="start">
+            <img [src]="p.ref">
+          </ion-avatar>
+          <ion-label>{{p.key}}</ion-label>
+          <ion-checkbox slot="end" [(ngModel)]="p.check" (ionChange)="Checker(p)"></ion-checkbox>
+        </ion-item>
+  </ion-list>
+</ion-content>
